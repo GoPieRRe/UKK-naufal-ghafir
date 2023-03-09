@@ -6,6 +6,18 @@
         <button type="button" class="m-2 btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
             add <i class="fas fa-plus"></i>
           </button>
+          
+          @if (Session::has('error'))
+        <div class="alert alert-danger" role="alert">
+            {{ Session::get('error') }}
+          </div>
+        @endif
+
+        @if (Session::has('success'))
+        <div class="alert alert-success" role="alert">
+            {{ Session::get('success') }}
+          </div>
+        @endif
           @include('Spp.addModal')
         <table class="table table-bordered" id="table">
             <thead>

@@ -1,9 +1,9 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="card-header">Siswa</div>
+    <div class="card-header">Pembayaran</div>
     <div class="card-body">
-        <button type="button" class="m-2 btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <button type="button" id="btnModal" class="m-2 btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
             add <i class="fas fa-plus"></i>
           </button>
 
@@ -14,7 +14,7 @@
         @endif
 
         @if (Session::has('success'))
-        <div class="alert alert-danger" role="alert">
+        <div class="alert alert-success" role="alert">
             {{ Session::get('success') }}
           </div>
         @endif
@@ -35,12 +35,12 @@
             <tbody>
                 @foreach ($pembayaran as $i)
                 <tr>
-                    <td>{{ $i->id_petugas }}</td>
-                    <td>{{ $i->nisn }}</td>
+                    <td>{{ $i->petugas->name }}</td>
+                    <td>{{ $i->nisn }} - {{ $i->siswa->nama }}</td>
                     <td>{{ $i->tgl_bayar }}</td>
                     <td>{{ $i->bulan_dibayar }}</td>
                     <td>{{ $i->tahun_dibayar }}</td>
-                    <td>{{ $i->id_spp }}</td>
+                    <td>Rp. {{ number_format($i->spp->nominal) }} - {{ $i->spp->tahun }}</td>
                     <td>Rp. {{ number_format( $i->jumlah_bayar) }}</td>
                     @include('Pembayaran.editModal')
                     {{-- <td>
@@ -65,6 +65,13 @@
             var data = $('#table');
 
             new DataTable(data);
+            $('#btnModal').on('click', function () {
+                $('#btnSubmit').addClass('disabled');
+            });
+
+            $('#btnSubmit').on('click', function () {
+                location.reload();
+            });
 
         });
     </script>

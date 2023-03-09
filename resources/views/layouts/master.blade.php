@@ -1,3 +1,5 @@
+@include('sweetalert::alert')
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -10,6 +12,7 @@
         <link rel="stylesheet" href="{{ asset('assets/datatables.min.css') }}">
         <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
         <link href="{{ asset('js/app.js') }}" rel="stylesheet" />
+        <link href="{{ asset('css/sweet.min.css') }}" rel="stylesheet" />
         <script src="{{ asset('js/fontawesome.min.js') }}" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed">
@@ -30,8 +33,8 @@
             </div>
         </div>
           
-          
         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            
             @csrf
         </form>
         {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script> --}}
@@ -40,6 +43,7 @@
         <script src="{{ asset('assets/datatables.js') }}" crossorigin="anonymous"></script>
         <script src="{{ asset('js/scripts.js') }}"></script>
         <script src="{{ asset('js/jquery.js') }}"></script>
+        <script src="{{ asset('js/sweet.min.js') }}"></script>
         <script>
             $(function () {
                 $("#yes").on('click', function () {      

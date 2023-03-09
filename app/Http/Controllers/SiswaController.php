@@ -7,6 +7,7 @@ use App\Models\Kelas;
 use App\Models\User;
 use App\Models\Pembayaran;
 use App\Models\Spp;
+use Alert;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -51,7 +52,7 @@ class SiswaController extends Controller
             'no_telp' => 'required',
             'id_spp' => 'required',
         ]);
-        $siswa = Siswa::where('nisn', $request->nisn)->first();
+        $siswa = Siswa::where('nisn', $request->nisn)->where('nis', $request->nis)->first();
 
         if ($siswa) {
             return back()->with('error', 'nisn sudah ada');
@@ -86,28 +87,6 @@ class SiswaController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Siswa  $Siswa
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Siswa $Siswa)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Siswa  $Siswa
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Siswa $Siswa)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -139,12 +118,19 @@ class SiswaController extends Controller
      */
     public function destroy($id)
     {
-        $pembayaran = Pembayaran::find($id);
+        $siswa = Siswa::find($id);
+        $user = User::where('username', $siswa->nis)->delete();
+        
+        if ($user) {
 
-        $cek = $pembayaran->delete();
+            $pembayaran = Pembayaran::where('nisn', $siswa->nisn)->delete();
+            $cekSiswa = $siswa->delete();
 
-        if ($cek) {
-            return redirect()->back()->with('success', 'data berhasil dihapus');
+            if ($cekSiswa) {
+                return redirect()->back()->with('success', 'data berhasil dihapus');
+            }else{
+                return redirect()->back()->with('error', 'data gagal dihapus');
+            }
         }else{
             return redirect()->back()->with('error', 'data gagal dihapus');
         }

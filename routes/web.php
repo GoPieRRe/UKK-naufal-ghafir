@@ -37,11 +37,11 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('Siswa', SiswaController::class);
         Route::resource('Petugas', PetugasController::class);
         Route::resource('Spp', SppController::class);
-        Route::get('Pembayaran/getData/{nisn}/{berapa}', [PembayaranController::class, 'getData'])->name('Pembayaran.getData');
-        Route::get('Pembayaran/sturk', [PembayaranController::class, 'struk'])->name('Pembayaran.struk');
     });
-
+    
     Route::middleware(['petugas'])->group(function () {
+        Route::get('Pembayaran/sturk', [PembayaranController::class, 'struk'])->name('Pembayaran.struk');
+        Route::get('Pembayaran/getData/{nisn}/{berapa}', [PembayaranController::class, 'getData'])->name('Pembayaran.getData');
         Route::resource('Pembayaran', PembayaranController::class);
     });
 

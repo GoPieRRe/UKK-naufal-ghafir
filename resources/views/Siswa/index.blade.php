@@ -6,6 +6,18 @@
         <button type="button" class="m-2 btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
             add <i class="fas fa-plus"></i>
           </button>
+          
+          @if (Session::has('error'))
+        <div class="alert alert-danger" role="alert">
+            {{ Session::get('error') }}
+          </div>
+        @endif
+
+        @if (Session::has('success'))
+        <div class="alert alert-success" role="alert">
+            {{ Session::get('success') }}
+          </div>
+        @endif
           @include('Siswa.addModal')
         <table class="table table-bordered" id="table">
             <thead>
@@ -37,6 +49,7 @@
                             @csrf
                            @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                            <button type="button" class="btn btn-danger btn-sm" id="btns"><i class="fas fa-trash"></i>s</button>
                         </form>
                     </td>
                 </tr>
@@ -53,7 +66,24 @@
             var data = $('#table');
 
             new DataTable(data);
-
+            $('#btns').on('click', function () {
+                swal({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Delete',
+                    padding: '0px'
+                    }).then(function(result) {
+                    if (result.value) {
+                        swal(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                        )
+                    }
+                    });
+            });
         });
     </script>
 @endsection

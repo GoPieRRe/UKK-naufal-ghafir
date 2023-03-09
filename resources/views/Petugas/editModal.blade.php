@@ -1,34 +1,36 @@
-<div class="modal fade" id="edit{{ $i->id }}" tabindex="-1" aria-labelledby="add" aria-hidden="true">
+<div class="modal fade" id="staticBackdrop{{ $i->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
-    <div class="modal-content">
+      <div class="modal-content">
         <div class="modal-header">
-        <h1 class="modal-title fs-5" id="edit{{ $i->id }}">Edit Siswa</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Petugas</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form action="{{ route('Kelas.update', $i->id) }}" method="post">
+            <form action="{{ route('Petugas.update', $i->id) }}" method="post">
                 @csrf
                 @method('PUT')
-                <div class="form-group">
-                    <label for="nama_kelas" class="form-label">Jurusan</label>
-                    <select name="nama_kelas" class="form-control select2" id="nk" required>
-                        <option value="{{ $i->nama_kelas }}">{{ $i->nama_kelas }}</option>
-                        <option value="X">X</option>
-                        <option value="XI">XI</option>
-                        <option value="XII">XII</option>
-                    </select>
+                <div class="form-group mt-2">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="email" class="form-control" value="{{ $i->username }}" name="username" placeholder="Masukkan Username" required>
                 </div>
                 <div class="form-group mt-2">
-                    <label for="kompetensi_keahlian" class="form-label">Kompetensi Keahlian</label>
-                    <input type="text" class="form-control" name="kompetensi_keahlian" value="{{ $i->kompetensi_keahlian }}" placeholder="Masukkan Jurusan" required>
+                    <label for="nama_petugas" class="form-label">Nama Petugas</label>
+                    <input type="text" class="form-control" value="{{ $i->nama_petugas }}" name="nama_petugas" placeholder="Masukkan Nama Petugas" required>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="password" class="form-label">Password lama</label>
+                    <input type="password" class="form-control" name="confirm_password" placeholder="Masukkan Password Lama" required>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="confirm_password" class="form-label">Password Baru</label>
+                    <input type="password" class="form-control" name="password" placeholder="Masukkan Password Baru" required>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-success">Update changes</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save</button>
             </form>
+            </div>
+        </div>
         </div>
     </div>
-    </div>
-</div>
-

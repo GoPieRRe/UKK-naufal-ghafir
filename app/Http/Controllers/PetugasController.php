@@ -108,11 +108,10 @@ class PetugasController extends Controller
             'nama_petugas' => 'required',
         ]);
 
-        if ($request->password != $request->confirm_password) {
+        if (Hash::make($request->confirm_password) != $Petugas->password) {
             return back()->with('error', 'konfirmasi password tidak sesuai');
         }
         
-        $Petugas = Petugas::find($id);
 
         $cek = $Petugas->update($request->all());
         

@@ -6,6 +6,7 @@ use App\Models\{Pembayaran, Siswa, Petugas, Spp, Kelas, User};
 use Illuminate\Http\Request;
 use carbon\Carbon;
 use PDF;
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Exports\PembayaranExport;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -132,8 +133,6 @@ class PembayaranController extends Controller
 
         if ($pembayaranSimpan) {
             return redirect()->route('Pembayaran.struk', $request);
-
-            return back();
         } else {
             return redirect()->back()->with('error', 'data gagal masuk');
         }
@@ -167,8 +166,6 @@ class PembayaranController extends Controller
         $pdf = PDF::loadView('Pembayaran.struk',compact('pembayaran', 'siswa', 'total', 'kembali', 'jumlah'));
         $name = 'Struk Pembayaran spp ' . date('Y-m-d',time());
         return $pdf->download($name.'.pdf');
-
-        return redirect()->route('Pembayaran.index')->with('success', 'pembayaran telah berhasil');
     }
 
     /**

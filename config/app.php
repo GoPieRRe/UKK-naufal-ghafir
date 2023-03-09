@@ -167,6 +167,8 @@ return [
         Barryvdh\DomPDF\ServiceProvider::class,
         // data tables
         Yajra\DataTables\DataTablesServiceProvider::class,
+        // sweetalet
+        RealRashid\SweetAlert\SweetAlertServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -239,6 +241,8 @@ return [
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         // pdf
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        // sweetalert
+        'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
 
     ],
 
