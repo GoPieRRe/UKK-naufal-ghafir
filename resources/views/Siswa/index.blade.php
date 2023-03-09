@@ -49,7 +49,6 @@
                             @csrf
                            @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
-                            <button type="button" class="btn btn-danger btn-sm" id="btns"><i class="fas fa-trash"></i>s</button>
                         </form>
                     </td>
                 </tr>
@@ -66,24 +65,7 @@
             var data = $('#table');
 
             new DataTable(data);
-            $('#btns').on('click', function () {
-                swal({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonText: 'Delete',
-                    padding: '0px'
-                    }).then(function(result) {
-                    if (result.value) {
-                        swal(
-                        'Deleted!',
-                        'Your file has been deleted.',
-                        'success'
-                        )
-                    }
-                    });
-            });
+
         });
     </script>
 @endsection
